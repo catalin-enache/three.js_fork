@@ -24,25 +24,20 @@ jobs:
         with:
           node-version: 24
           cache: 'npm'
-      - name: Install Vulkan drivers and xvfb
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y mesa-vulkan-drivers xvfb
-
       - name: Install dependencies
         run: npm ci
 
       - name: === Lint testing ===
-        run: xvfb-run -a npm run lint
+        run: npm run lint
 
       - name: === Unit testing ===
-        run: xvfb-run -a npm run test-unit
+        run: npm run test-unit
 
       - name: === Unit addons testing ===
-        run: xvfb-run -a npm run test-unit-addons
+        run: npm run test-unit-addons
 
       - name: === Examples ready for release ===
-        run: xvfb-run -a npm run test-e2e-cov
+        run: npm run test-e2e-cov
 
   e2e:
     name: E2E testing
